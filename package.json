@@ -1,0 +1,23 @@
+{
+  "name": "timetravel-agency",
+  "version": "1.0.0",
+  "description": "Webapp interactive pour une agence de voyage temporel - Projet M1/M2 IA Créatives",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel"
+  },
+  "keywords": [
+    "time-travel",
+    "ai",
+    "chatbot",
+    "webapp",
+    "creative-ai",
+    "tailwindcss"
+  ],
+  "author": "Projet M1/M2 Digital & IA",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

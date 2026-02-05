@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTravel Agency - Explorez l'histoire réinventée</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'time-gold': '#D4AF37',
+                        'time-dark': '#0F172A',
+                        'time-blue': '#1E3A8A'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0.95) 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: none;
+            flex-direction: column;
+            z-index: 999;
+        }
+        
+        .chat-window.active {
+            display: flex;
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: #D4AF37;
+        }
+        
+        .quiz-option.selected {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #D4AF37;
+            border-width: 2px;
+        }
+    </style>
+</head>
+<body class="bg-time-dark text-white">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-time-dark/80 backdrop-blur-md z-50 border-b border-time-gold/20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-3xl">🕰️</span>
+                    <h1 class="text-2xl font-bold text-time-gold">TimeTravel Agency</h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-time-gold transition">Accueil</a>
+                    <a href="#destinations" class="hover:text-time-gold transition">Destinations</a>
+                    <a href="#quiz" class="hover:text-time-gold transition">Quiz</a>
+                    <a href="#contact" class="hover:text-time-gold transition">Contact</a>
+                </div>
+                <button class="md:hidden text-time-gold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Video Background (placeholder gradient) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-time-blue via-time-dark to-black">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-time-gold rounded-full filter blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+            </div>
+        </div>
+        
+        <div class="gradient-overlay absolute inset-0"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-5xl fade-in">
+            <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight">
+                Explorez l'histoire<br/>
+                <span class="text-time-gold">réinventée</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 font-light">
+                Voyagez dans le temps et vivez les moments les plus extraordinaires de l'humanité
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#destinations" class="bg-time-gold text-time-dark px-8 py-4 rounded-full font-semibold hover:bg-yellow-500 transition transform hover:scale-105">
+                    Découvrir les destinations
+                </a>
+                <a href="#quiz" class="border-2 border-time-gold text-time-gold px-8 py-4 rounded-full font-semibold hover:bg-time-gold hover:text-time-dark transition transform hover:scale-105">
+                    Trouver mon voyage idéal
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-time-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-gradient-to-b from-time-dark to-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center slide-in">
+                <h2 class="text-5xl font-bold mb-8 text-time-gold">Qui sommes-nous ?</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                    TimeTravel Agency est la première et unique agence de voyage temporel de luxe. 
+                    Fondée par une équipe de chrononautes passionnés, nous offrons des expériences 
+                    immersives dans les périodes les plus fascinantes de l'histoire.
+                </p>
+                <p class="text-lg text-gray-400">
+                    Nos experts en voyage temporel sélectionnent minutieusement chaque destination 
+                    pour garantir une expérience authentique, sécurisée et inoubliable.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-4 text-time-gold">Nos destinations temporelles</h2>
+            <p class="text-center text-gray-400 mb-16 text-lg">Choisissez votre époque et laissez-nous vous guider</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Paris 1889 -->
+                <div class="destination-card card-hover bg-gray-800 rounded-2xl overflow-hidden shadow-xl border border-gray-700">
+                    <div class="relative h-64 bg-gradient-to-br from-pink-900 to-purple-900">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-8xl">🗼</span>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-time-gold text-time-dark px-3 py-1 rounded-full text-sm font-semibold">
+                            1889
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">Paris - Belle Époque</h3>
+                        <p class="text-gray-400 mb-4">
+                            Assistez à l'inauguration de la Tour Eiffel et découvrez l'Exposition Universelle. 
+                            Promenez-vous dans le Paris de la Belle Époque, époque de raffinement et d'élégance.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🎨 Art</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🏛️ Architecture</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🍷 Gastronomie</span>
+                        </div>
+                        <button onclick="openDestinationModal('paris')" class="w-full bg-time-gold text-time-dark py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                            En savoir plus
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Crétacé -->
+                <div class="destination-card card-hover bg-gray-800 rounded-2xl overflow-hidden shadow-xl border border-gray-700">
+                    <div class="relative h-64 bg-gradient-to-br from-green-900 to-teal-900">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-8xl">🦕</span>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-time-gold text-time-dark px-3 py-1 rounded-full text-sm font-semibold">
+                            -65M
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">Crétacé - Ère des Dinosaures</h3>
+                        <p class="text-gray-400 mb-4">
+                            Explorez la Terre il y a 65 millions d'années. Observez les dinosaures dans leur habitat naturel 
+                            et découvrez une nature préhistorique à couper le souffle.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🌿 Nature</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🦖 Aventure</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🔬 Science</span>
+                        </div>
+                        <button onclick="openDestinationModal('cretace')" class="w-full bg-time-gold text-time-dark py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                            En savoir plus
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Florence 1504 -->
+                <div class="destination-card card-hover bg-gray-800 rounded-2xl overflow-hidden shadow-xl border border-gray-700">
+                    <div class="relative h-64 bg-gradient-to-br from-amber-900 to-orange-900">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-8xl">🎨</span>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-time-gold text-time-dark px-3 py-1 rounded-full text-sm font-semibold">
+                            1504
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">Florence - Renaissance</h3>
+                        <p class="text-gray-400 mb-4">
+                            Rencontrez Michel-Ange et Léonard de Vinci. Plongez dans l'âge d'or de la Renaissance italienne, 
+                            berceau de l'art et de la culture moderne.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🖼️ Art</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">📚 Culture</span>
+                            <span class="bg-time-dark text-time-gold px-3 py-1 rounded-full text-sm">🏛️ Histoire</span>
+                        </div>
+                        <button onclick="openDestinationModal('florence')" class="w-full bg-time-gold text-time-dark py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                            En savoir plus
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="py-20 bg-gradient-to-b from-gray-900 to-time-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-5xl font-bold text-center mb-4 text-time-gold">Trouvez votre destination idéale</h2>
+                <p class="text-center text-gray-400 mb-12 text-lg">Répondez à quelques questions pour découvrir quelle époque vous correspond</p>
+                
+                <div id="quiz-container" class="bg-gray-800 rounded-2xl p-8 shadow-xl">
+                    <div id="quiz-content">
+                        <!-- Quiz will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-time-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-5xl font-bold mb-8 text-time-gold">Contactez-nous</h2>
+                <p class="text-xl text-gray-300 mb-12">
+                    Prêt à embarquer pour votre voyage temporel ? Notre équipe est là pour vous accompagner.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-center space-x-4">
+                        <span class="text-2xl">📧</span>
+                        <span class="text-lg">contact@timetravel-agency.com</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-4">
+                        <span class="text-2xl">📞</span>
+                        <span class="text-lg">+33 (0)1 TEMPO RAL</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-4">
+                        <span class="text-2xl">📍</span>
+                        <span class="text-lg">1 Avenue du Temps, 75000 Paris</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-time-gold/20">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2026 TimeTravel Agency - Projet pédagogique M1/M2 Digital & IA</p>
+            <p class="mt-2 text-sm">Créé avec ❤️ et IA générative (Claude 4.5 Sonnet)</p>
+        </div>
+    </footer>
+
+    <!-- Chat Bubble -->
+    <div class="chat-bubble" onclick="toggleChat()">
+        <svg class="w-8 h-8 text-time-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="chat-window" id="chatWindow">
+        <div class="bg-gradient-to-r from-time-gold to-yellow-600 p-4 rounded-t-2xl flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🤖</span>
+                <div>
+                    <h3 class="font-bold text-time-dark">Assistant Temporel</h3>
+                    <p class="text-xs text-time-dark/70">En ligne</p>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="text-time-dark hover:text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-white">
+            <div class="flex items-start space-x-2">
+                <div class="w-8 h-8 rounded-full bg-time-gold flex items-center justify-center flex-shrink-0">
+                    <span class="text-time-dark">🤖</span>
+                </div>
+                <div class="bg-gray-100 rounded-lg p-3 max-w-[80%] text-gray-800">
+                    <p>Bonjour ! Je suis votre assistant temporel. Comment puis-je vous aider à organiser votre voyage dans le temps ?</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-4 bg-gray-50 rounded-b-2xl">
+            <div class="flex space-x-2">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Posez-moi vos questions..." 
+                    class="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-time-gold text-gray-800"
+                    onkeypress="if(event.key === 'Enter') sendMessage()"
+                >
+                <button onclick="sendMessage()" class="bg-time-gold text-time-dark px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition">
+                    Envoyer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for destination details -->
+    <div id="destinationModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-6" onclick="closeModal(event)">
+        <div class="bg-gray-900 rounded-2xl max-w-2xl w-full p-8 relative" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
