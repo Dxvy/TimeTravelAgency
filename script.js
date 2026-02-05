@@ -206,38 +206,38 @@ function openDestinationModal(destinationKey) {
     const destination = destinations[destinationKey];
     
     modalContent.innerHTML = `
-        <div class="text-center mb-6">
-            <span class="text-6xl">${destination.icon}</span>
+        <div class="text-center mb-4 sm:mb-6">
+            <span class="text-4xl sm:text-6xl">${destination.icon}</span>
         </div>
-        <h2 class="text-3xl font-bold mb-4 text-time-gold">${destination.name}</h2>
-        <p class="text-gray-300 mb-6 text-lg">${destination.description}</p>
-        
-        <div class="bg-gray-800 rounded-xl p-6 mb-6">
-            <h3 class="font-bold text-time-gold mb-4 text-xl">Points forts du voyage :</h3>
-            <ul class="space-y-3">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-time-gold">${destination.name}</h2>
+        <p class="text-gray-300 mb-4 sm:mb-6 text-base sm:text-lg">${destination.description}</p>
+
+        <div class="bg-gray-800 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+            <h3 class="font-bold text-time-gold mb-3 sm:mb-4 text-lg sm:text-xl">Points forts du voyage :</h3>
+            <ul class="space-y-2 sm:space-y-3">
                 ${destination.highlights.map(highlight => `
-                    <li class="flex items-start space-x-3">
+                    <li class="flex items-start space-x-2 sm:space-x-3">
                         <span class="text-time-gold mt-1">✓</span>
-                        <span class="text-gray-300">${highlight}</span>
+                        <span class="text-gray-300 text-sm sm:text-base">${highlight}</span>
                     </li>
                 `).join('')}
             </ul>
         </div>
-        
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-gray-800 rounded-xl p-4 text-center">
-                <div class="text-3xl mb-2">💰</div>
-                <div class="text-sm text-gray-400">Prix</div>
-                <div class="font-bold text-time-gold">${destination.price}</div>
+
+        <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <div class="bg-gray-800 rounded-xl p-3 sm:p-4 text-center">
+                <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">💰</div>
+                <div class="text-xs sm:text-sm text-gray-400">Prix</div>
+                <div class="font-bold text-time-gold text-sm sm:text-base">${destination.price}</div>
             </div>
-            <div class="bg-gray-800 rounded-xl p-4 text-center">
-                <div class="text-3xl mb-2">⏱️</div>
-                <div class="text-sm text-gray-400">Durée</div>
-                <div class="font-bold text-time-gold">${destination.duration}</div>
+            <div class="bg-gray-800 rounded-xl p-3 sm:p-4 text-center">
+                <div class="text-2xl sm:text-3xl mb-1 sm:mb-2">⏱️</div>
+                <div class="text-xs sm:text-sm text-gray-400">Durée</div>
+                <div class="font-bold text-time-gold text-sm sm:text-base">${destination.duration}</div>
             </div>
         </div>
-        
-        <button onclick="contactForBooking('${destination.name}')" class="w-full bg-time-gold text-time-dark py-4 rounded-xl font-bold text-lg hover:bg-yellow-500 transition">
+
+        <button onclick="contactForBooking('${destination.name}')" class="w-full bg-time-gold text-time-dark py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:bg-yellow-500 transition">
             Réserver maintenant
         </button>
     `;
