@@ -428,7 +428,13 @@ Projet pédagogique - M1/M2 Digital & IA
 ---
 
 **Projet réalisé dans le cadre du cours "IA Créatives" - Session 2**  
-**Étudiant** : [VOTRE NOM]  
+
+**Étudiant** : 
+JEHAM Laurie
+BORELLO Benjamin
+DICKO Fatim
+MARTHELY Davy
+
 **Date** : Février 2026  
 **Durée de réalisation** : 2 heures
 

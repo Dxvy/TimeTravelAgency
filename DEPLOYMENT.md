@@ -152,3 +152,8 @@ N'oubliez pas de :
 - ✅ Rendre sur Moodle avant la deadline
 
 **Bon voyage temporel !** 🕰️
+
+JEHAM Laurie
+BORELLO Benjamin
+DICKO Fatim
+MARTHELY Davy
